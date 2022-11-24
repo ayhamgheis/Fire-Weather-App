@@ -1,3 +1,5 @@
+
+
 import sys 
 from tracemalloc import start
 import requests
@@ -90,53 +92,5 @@ def scrape(url, start_date, end_date, dates_provided):
 
 
 
-
-#----------------------------------------------------- CSV merge --------------------------------------------------------------#
-def combine():
-   
-    #input filename for fts 360 data and create corresponding dataframe
-    fts = input ("Enter FTS 360 filename: ")
-    fts_dataframe = pd.read_csv(fts)
-
-    #input filename for crd data and create corresponding dataframe
-    crd = input("Enter CRD filename: ")
-    crd_dataframe = pd.read_csv(crd)
-
-    # merge the two dataframes
-    merge = pd.concat([crd_dataframe, fts_dataframe])
-
-    #generate and print output file name
-    crd_name = crd.split(".")
-    fts_name = fts.split(".")
-    merged_filename = f'{fts_name[0]}_{crd_name[0]}_merged.csv'
-    print(merged_filename)
-
-    #convert merged dataframes to csv file and write to output filename
-    merge.to_csv(merged_filename, index= False)
-
-
-
-    #df = pd.concat(
-    #map(pd.read_csv, [fts_dataframe, crd_dataframe]), ignore_index=True)
-
-
-    #df.to_csv('merged.csv', index = False)
-
-    
-    
-#----------------------------------------------------- CSV merge --------------------------------------------------------------#
-
-
-def run():
-    if (sys.argv[1] == 'scrape'):
-        get_dates()
-
-    elif (sys.argv[1] == 'merge'):
-        combine()
-    else:
-        sys.exit('command line argument invalid, please provide one of the following: merge or scrape')
-
-    
-
 if __name__== '__main__':
-    run()
+    get_dates()
